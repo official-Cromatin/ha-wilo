@@ -1,9 +1,14 @@
-import voluptuous as vol
-from homeassistant import config_entries
-from .const import DOMAIN
-import regex as re
-from homeassistant.helpers.aiohttp_client import async_get_clientsession
+"""Handles config flow for Wilo integration."""
+
 import aiohttp
+import regex as re
+import voluptuous as vol
+
+from homeassistant import config_entries
+from homeassistant.helpers.aiohttp_client import async_get_clientsession
+
+from .const import DOMAIN
+
 
 class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Wilo config flow."""
@@ -17,8 +22,8 @@ class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         session = async_get_clientsession(self.hass)
 
         try:
-            async with session.get(f"http://{ip_adress}", timeout=10) as resp:
-                if resp.status != 200:
+            async with session.get(f"http://{ip_adress}", timeout=10) as response:
+                if response.status != 200:
                     return "invalid_status"
         except aiohttp.ClientConnectorError:
             return "cannot_connect"
