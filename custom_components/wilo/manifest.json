@@ -7,6 +7,6 @@
   "requirements": [
     "beautifulsoup4==4.12.3"
   ],
-  "version": "0.0.1",
+  "version": "0.1.0",
   "config_flow": true
 }

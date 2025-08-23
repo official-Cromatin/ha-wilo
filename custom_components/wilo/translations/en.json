@@ -1,0 +1,32 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Configure Rain3 Wilo",
+                "description": "Please enter the IP address, pump type and update interval.",
+                "data": {
+                    "ip": "IP Address",
+                    "type": "Pump Type"
+                }
+            },
+            "interval": {
+                "title": "Configure integration",
+                "description": "Please enter the update interval in seconds for how often the integration updates the entity states.",
+                "data": {
+                    "interval": "Update Interval (seconds)"
+                }
+            }
+        },
+        "error": {
+            "invalid_ip": "Invalid IP address.",
+            "cannot_connect": "Failed to connect to the pump.",
+            "invalid_status": "The pumps webserver does not work properly.",
+            "timeout": "The request took longer than 10 seconds.",
+            "interval_is_zero": "The update interval must be greater than zero.",
+            "intervall_smaller_than_zero": "The update interval cannot be negative."
+        },
+        "abort": {
+            "already_configured": "This device is already configured."
+        }
+    }
+}
