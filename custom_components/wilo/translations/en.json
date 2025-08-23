@@ -3,10 +3,10 @@
         "step": {
             "user": {
                 "title": "Configure Rain3 Wilo",
-                "description": "Please enter the IP address, pump type and update interval.",
+                "description": "Please enter the IP address, pump model and update interval.",
                 "data": {
                     "ip": "IP Address",
-                    "type": "Pump Type"
+                    "model": "Pump Model"
                 }
             },
             "interval": {

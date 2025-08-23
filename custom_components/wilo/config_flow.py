@@ -47,14 +47,14 @@ class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             if connectivity_code is not None:
                 errors["base"] = connectivity_code
 
-            self._flow_data["type"] = user_input["type"]
+            self._flow_data["model"] = user_input["model"]
 
             if "base" in errors:
                 return self.async_show_form(
                     step_id="user",
                     data_schema=vol.Schema({
                         vol.Required("ip", default=user_input["ip"]): str,
-                        vol.Required("type", default=user_input["type"]): vol.In(["rain3"]),
+                        vol.Required("model", default=user_input["model"]): vol.In(["rain3"]),
                     }),
                     errors=errors
                 )
@@ -64,7 +64,7 @@ class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="user",
             data_schema=vol.Schema({
                 vol.Required("ip"): str,
-                vol.Required("type"): vol.In(["rain3"]),
+                vol.Required("model"): vol.In(["rain3"]),
             })
         )
 
@@ -88,7 +88,7 @@ class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     errors=errors
                 )
             return self.async_create_entry(
-                title=f"Wilo {self._flow_data["type"]} ({self._flow_data["ip"]})",
+                title=f"Wilo {self._flow_data["model"]} ({self._flow_data["ip"]})",
                 data=self._flow_data
             )
 
