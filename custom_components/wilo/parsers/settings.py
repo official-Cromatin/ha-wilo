@@ -15,6 +15,7 @@ class SettingsParser(BaseParser):
             value = match.group(2).strip()
 
             clean_key = regex.sub(r"^\d+(\.\d+)*\s*", "", raw_key)
+            clean_key = regex.sub(r"^E\d+(?:\.\d+)?\s*", "", clean_key)
             clean_key = clean_key.rstrip(":")
 
             if clean_key.lower().startswith("last occur"):
