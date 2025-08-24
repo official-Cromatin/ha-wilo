@@ -12,14 +12,6 @@ class BasePump:
         self._ip = ip
         self._urls = urls
 
-    @staticmethod
-    async def fetch_ressource(hass:HomeAssistant, url:str) -> str:
-        """Fetches the ressource via HTTP GET."""
-        session = async_get_clientsession(hass)
-
-        async with session.get(url, timeout=10) as response:
-            return await response.text()
-
     async def update(self, hass:HomeAssistant) -> dict:
         """Updates the coordinator data by fetching all urls and combining the data to one singular dictionary."""
         session = async_get_clientsession(hass)
