@@ -11,6 +11,12 @@ from .base import BasePump
 class Rain3Pump(BasePump):
     """Represents the Wilo Rain3 pump model."""
 
+    ENTITY_MAP = {
+        ("state", "MP"): PumpStateSensor,
+        ("state", "Pressure"): PumpPressureSensor,
+        ("state", "Level"): CisternLevelSensor
+    }
+
     def __init__(self, ip:str):
         super().__init__(
             ip,
