@@ -1,5 +1,5 @@
 """Parser used to parse status page."""
-import regex 
+import regex
 
 from .base import BaseParser
 
