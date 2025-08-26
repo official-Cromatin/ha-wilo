@@ -15,9 +15,8 @@ class PumpStateSensor(WiloBaseEntity, BinarySensorEntity):
         super().__init__(coordinator, pump, category_key, value_key)
         self._category_key = category_key
         self._value_key = value_key
-        self._attr_device_class = BinarySensorDeviceClass.POWER
         self._attr_translation_key = "pump_state"
-        # self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_device_class = BinarySensorDeviceClass.RUNNING
 
     @property
     def is_on(self) -> bool:
