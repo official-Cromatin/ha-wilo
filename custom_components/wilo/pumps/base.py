@@ -15,12 +15,18 @@ class BasePump:
 
     ENTITY_MAP: dict[tuple[str, str], WiloEntities]
 
-    def __init__(self, ip:str, model:str, urls:dict[str, WiloParser]):
+    def __init__(self, ip:str, device_id:int, model:str, urls:dict[str, WiloParser]):
         self._ip = ip
+        self._device_id = device_id
         self._model = model
         self._urls = urls
         self._unique_id:str
         self._device_info: DeviceInfo
+
+        if device_id == 0:
+            device_id_str = ""
+        device_id_str = str(device_id)
+        self._unique_id = f"{model}_{device_id_str}"
 
     @abstractmethod
     async def create_device_info(self):

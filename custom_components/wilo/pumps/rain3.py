@@ -17,9 +17,10 @@ class Rain3Pump(BasePump):
         ("state", "Level"): CisternLevelSensor
     }
 
-    def __init__(self, ip:str):
+    def __init__(self, ip:str, device_id:int):
         super().__init__(
             ip,
+            device_id,
             "rain3",
             {
                 "identity": StatusParser,
@@ -35,7 +36,6 @@ class Rain3Pump(BasePump):
     async def create_device_info(self, hass:HomeAssistant):
         device_data = await self.update(hass)
 
-        self._unique_id = f"{DOMAIN}_{self._model}_{self._ip.replace(".", "_")}"
         self._device_info = DeviceInfo(
             configuration_url=f"http://{self._ip}",
             connections={("ip", self._ip)},

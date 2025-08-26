@@ -18,10 +18,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     ip:str = entry.data["ip"]
     model:str = entry.data["model"]
     interval:int = entry.data["interval"]
+    device_id:int = entry.data["device_id"]
 
     match model:
         case "rain3":
-            pump = Rain3Pump(ip)
+            pump = Rain3Pump(ip, device_id)
     await pump.create_device_info(hass)
 
     coordinator = WiloCoordinator(

@@ -16,6 +16,7 @@ class PumpStateSensor(WiloBaseEntity, BinarySensorEntity):
         self._category_key = category_key
         self._value_key = value_key
         self._attr_translation_key = "pump_state"
+        self._attr_unique_id = f"{self._attr_base_unique_id}_{self._attr_translation_key}"
         self._attr_device_class = BinarySensorDeviceClass.RUNNING
 
     @property

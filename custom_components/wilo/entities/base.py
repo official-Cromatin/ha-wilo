@@ -13,7 +13,7 @@ class WiloBaseEntity(CoordinatorEntity):
         self._pump = pump
         self._category_key = category_key
         self._value_key = value_key
-        self._attr_unique_id = f"{pump.unique_id}_{category_key}_{value_key}"
+        self._attr_base_unique_id = pump.unique_id
 
     def get_coordinator_value(self) -> Any:
         """Returns the coordinator value assigned to this entity."""
