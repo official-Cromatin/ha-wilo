@@ -17,7 +17,7 @@ class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     def __init__(self):
         self._flow_data = {}
 
-    async def async_verify_connectivity(self, ip_adress:str):
+    async def _async_verify_connectivity(self, ip_adress:str):
         """Checks the reachability of the specified IP address."""
         session = async_get_clientsession(self.hass)
 
@@ -30,6 +30,21 @@ class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         except TimeoutError:
             return "timeout"
 
+    def _async_get_id(self) -> int:
+        """Returns a incremented ID for the device based on existing devices with the same model."""
+        device_id = 0
+        for entry in self.hass.config_entries.async_entries(domain=DOMAIN):
+            if entry.data["model"] == self._flow_data["model"]:
+                device_id += 1
+        return device_id
+
+    def _async_is_already_configured(self) -> bool:
+        """Checks if a device with the same ip is already configured."""
+        for entry in self.hass.config_entries.async_entries(domain=DOMAIN):
+            if entry.data["ip"] == self._flow_data["ip"]:
+                return True
+        return False
+
     async def async_step_user(self, user_input=None):
         """Handle config flow start.
 
@@ -37,13 +52,16 @@ class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """
         errors = {}
         if user_input is not None:
+            if self._async_is_already_configured():
+                return self.async_abort(reason="already_configured")
+
             pump_ip_regex = re.match("^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", user_input["ip"])
             if pump_ip_regex is None:
                 errors["base"] = "invalid_ip"
             else:
                 self._flow_data["ip"] = pump_ip_regex.string
 
-            connectivity_code = await self.async_verify_connectivity(user_input["ip"])
+            connectivity_code = await self._async_verify_connectivity(user_input["ip"])
             if connectivity_code is not None:
                 errors["base"] = connectivity_code
 
@@ -87,6 +105,9 @@ class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     }),
                     errors=errors
                 )
+
+            self._flow_data["device_id"] = self._async_get_id()
+
             return self.async_create_entry(
                 title=f"Wilo {self._flow_data["model"]} ({self._flow_data["ip"]})",
                 data=self._flow_data
