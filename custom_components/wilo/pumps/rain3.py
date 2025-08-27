@@ -3,7 +3,15 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceInfo
 
 from ..const import DOMAIN
-from ..entities import PumpPressureSensor, PumpStateSensor, CisternLevelSensor
+from ..entities import (
+    CalcProtectionTimerSensor,
+    CisternLevelSensor,
+    FlushingTimerSensor,
+    PumpPressureSensor,
+    PumpStateSensor,
+    ThreeWayValvePositionSensor,
+    PumpRuntimeSensor
+)
 from ..parsers import AlarmParser, SettingsParser, StatusParser
 from .base import BasePump
 
@@ -13,8 +21,12 @@ class Rain3Pump(BasePump):
 
     ENTITY_MAP = {
         ("state", "MP"): PumpStateSensor,
+        ("state", "Level"): CisternLevelSensor,
         ("state", "Pressure"): PumpPressureSensor,
-        ("state", "Level"): CisternLevelSensor
+        ("state", "3 Ways-valve"): ThreeWayValvePositionSensor,
+        ("state", "Calc. protection in"): CalcProtectionTimerSensor,
+        ("state", "Flushing in"): FlushingTimerSensor,
+        ("state", "MP running for"): PumpRuntimeSensor,
     }
 
     def __init__(self, ip:str, device_id:int):
