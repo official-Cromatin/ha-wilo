@@ -1,6 +1,6 @@
 """Providers implement update functionality and describe supported entities."""
 
-from .base_provider import BaseProvider
+from .base import BaseProvider
 
 __all__ = ["BaseProvider"]
 
