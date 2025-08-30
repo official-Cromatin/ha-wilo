@@ -8,6 +8,7 @@ from homeassistant import config_entries
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .const import DOMAIN
+from .models import WiloModels
 
 
 class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -50,6 +51,7 @@ class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         Requests the user to enter device relevant information (adress and model)
         """
+        models = [model.value for model in WiloModels]
         errors = {}
         if user_input is not None:
             if self._async_is_already_configured():
@@ -72,7 +74,7 @@ class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     step_id="user",
                     data_schema=vol.Schema({
                         vol.Required("ip", default=user_input["ip"]): str,
-                        vol.Required("model", default=user_input["model"]): vol.In(["rain3"]),
+                        vol.Required("model", default=user_input["model"]): vol.In(models),
                     }),
                     errors=errors
                 )
@@ -82,7 +84,7 @@ class WiloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="user",
             data_schema=vol.Schema({
                 vol.Required("ip"): str,
-                vol.Required("model"): vol.In(["rain3"]),
+                vol.Required("model"): vol.In(models),
             })
         )
 
