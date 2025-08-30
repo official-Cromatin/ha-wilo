@@ -2,12 +2,12 @@
 
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
-from .pumps import PumpHandlerClass
+from .providers import PumpProvider
 
 
 class WiloCoordinator(DataUpdateCoordinator):
     """Class to regularly fetch new data."""
-    def __init__(self, hass, logger, update_interval, name, pump:PumpHandlerClass):
+    def __init__(self, hass, logger, update_interval, name, pump:PumpProvider):
         """Initialize Wilo Coordinator."""
         super().__init__(hass, logger, update_interval=update_interval, name=name)
         self.__pump = pump
