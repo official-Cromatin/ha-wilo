@@ -24,6 +24,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     match model:
         case WiloModels.RAIN3.value:
             pump = Rain3Provider(ip, device_id, hass)
+    await pump.async_create_device_info()
 
     coordinator = WiloCoordinator(
         hass,

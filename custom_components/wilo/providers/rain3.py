@@ -42,22 +42,22 @@ class Rain3Provider(BaseProvider):
             self.__client_session = async_get_clientsession(self._hass)
         return self.__client_session
 
-    async def async_create_device_info(self, hass:HomeAssistant):
+    async def async_create_device_info(self):
         """Creates device info for rain3 pump."""
-        device_data = await self.update(hass)
+        device_data = await self.async_update()
 
         self._device_info = DeviceInfo(
-            configuration_url=f"http://{self._ip}",
-            connections={("ip", self._ip)},
+            configuration_url=f"http://{self._device_ip}",
+            connections={("ip", self._device_ip)},
             identifiers={(DOMAIN, self._unique_id)},
             manufacturer=DOMAIN.capitalize(),
-            model=self._model.capitalize(),
-            name=f"{DOMAIN.capitalize()} {self._model.capitalize()} ({self._ip})",
-            serial_number=device_data["identity"]["Serial number"],
-            sw_version=device_data["identity"]["SW Version"],
+            model=self._model.value.capitalize(),
+            name=f"{DOMAIN.capitalize()} {self._model.value.capitalize()} ({self._device_ip})",
+            serial_number=device_data.serial_number,
+            sw_version=device_data.software_version,
         )
 
-    async def async_update(self):
+    async def async_update(self) -> Rain3Datastore:
         combined_data:dict[str, dict[str, Any]] = {}
 
         for url_path in ["identity", "state", "download"]:

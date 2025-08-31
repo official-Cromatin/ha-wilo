@@ -1,6 +1,7 @@
 """Implements the GenericWiloSensor."""
 
 from homeassistant.components.sensor import SensorEntity
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
@@ -24,6 +25,7 @@ class GenericWiloSensor(CoordinatorEntity, SensorEntity):
             Provider providing this sensor entity.
         """
         super().__init__(coordinator)
+        self._provider = provider
         self._attr_unique_id = f"{provider.unique_id}_{descriptor.partial_unique_entity_id}"
         self._attr_translation_key = descriptor.translation_key
         self._attr_device_class = descriptor.device_class
@@ -37,3 +39,7 @@ class GenericWiloSensor(CoordinatorEntity, SensorEntity):
     @property
     def native_value(self):
         return self.__update_function(self.coordinator.data)
+
+    @property
+    def device_info(self) -> DeviceInfo:
+        return self._provider.device_info
