@@ -4,13 +4,13 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
 
-from datastores import BaseDatastore
-
 from homeassistant.components.sensor import (
     EntityCategory,
     SensorDeviceClass,
     SensorStateClass,
 )
+
+from .datastores import BaseDatastore
 
 
 @dataclass
@@ -23,6 +23,6 @@ class WiloEntityDescriptor:
     state_class: SensorStateClass | None
     native_unit_of_measurement: str | None
     unit_of_measurement: str | None
+    value_update_function: Callable[[BaseDatastore], Any]
     entity_registry_enabled_default: bool = True
     entity_category: EntityCategory | None = None
-    value_update_function: Callable[[BaseDatastore], Any]
