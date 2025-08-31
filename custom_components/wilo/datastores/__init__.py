@@ -3,3 +3,4 @@
 from .base import BaseDatastore
 
 __all__ = ["BaseDatastore"]
+Datastores = BaseDatastore

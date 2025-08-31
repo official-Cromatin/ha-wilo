@@ -1,12 +1,14 @@
 """Defines the base class all providers inherit from."""
 
 from abc import ABC, abstractmethod
-from typing import Any
+import logging
 
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceInfo
 
+from ..const import DOMAIN
 from ..models import WiloModels
+from ..datastores import Datastores
 
 
 class BaseProvider(ABC):
@@ -21,18 +23,22 @@ class BaseProvider(ABC):
             ID of the device.
 
         :param WiloModels model:
-            Enum
+            Enum containing supported pump models
+
+        :param HomeAssistant hass:
+            Home assistant instance used for various tasks.
         """
+        if device_id == 0:
+            self._unique_id = f"{model.value}_{device_id}"
+        else:
+            self._unique_id = f"{model.value}_{device_id}"
+
         self._device_ip = device_ip
         self._device_id = device_id
         self._model = model
         self._hass = hass
         self._device_info:DeviceInfo | None = None
-
-        if device_id == 0:
-            self._unique_id = f"{model.value}_{device_id}"
-        else:
-            self._unique_id = f"{model.value}_{device_id}"
+        self._logger:logging.Logger = logging.getLogger(f"{DOMAIN}_{self._unique_id}")
 
     @abstractmethod
     async def async_create_device_info(self):
@@ -42,7 +48,7 @@ class BaseProvider(ABC):
         """Optional cleanup."""
 
     @abstractmethod
-    async def async_update(self) -> dict[str, Any]:
+    async def async_update(self) -> Datastores:
         """Fetch and normalize data. Return dict for this provider namespace."""
 
     @property
