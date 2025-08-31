@@ -8,6 +8,7 @@ from homeassistant.helpers.update_coordinator import timedelta
 from .const import DOMAIN
 from .coordinator import WiloCoordinator
 from .models import WiloModels
+from .providers import Rain3Provider
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -22,8 +23,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     match model:
         case WiloModels.RAIN3.value:
-            #TODO: Initialize rain3 provider class
-            pump = None
+            pump = Rain3Provider(ip, device_id, hass)
 
     coordinator = WiloCoordinator(
         hass,

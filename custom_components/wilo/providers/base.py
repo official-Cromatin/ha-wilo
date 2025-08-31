@@ -9,10 +9,14 @@ from homeassistant.helpers.device_registry import DeviceInfo
 from ..const import DOMAIN
 from ..models import WiloModels
 from ..datastores import Datastores
+from ..wilo_sensor_descriptor import WiloEntityDescriptor
 
 
 class BaseProvider(ABC):
     """Base class all providers inherit from."""
+
+    SENSORS:list[WiloEntityDescriptor]
+
     def __init__(self, device_ip:str, device_id:int, model:WiloModels, hass:HomeAssistant):
         """Initialize the provider class.
 
