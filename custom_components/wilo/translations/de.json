@@ -1,0 +1,214 @@
+{
+    "title": "Wilo",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Wilo Pumpe konfigurieren",
+                "description": "Bitte geben Sie die IP-Adresse, das Pumpenmodell und das Aktualisierungsintervall ein.",
+                "data": {
+                    "ip": "IP-Adresse",
+                    "model": "Pumpenmodell"
+                }
+            },
+            "interval": {
+                "title": "Integration konfigurieren",
+                "description": "Bitte geben Sie das Aktualisierungsintervall in Sekunden ein, wie oft die Integration die Entitätszustände aktualisiert.",
+                "data": {
+                    "interval": "Aktualisierungsintervall (Sekunden)"
+                }
+            }
+        },
+        "error": {
+            "invalid_ip": "Ungültige IP-Adresse.",
+            "cannot_connect": "Verbindung zur Pumpe fehlgeschlagen.",
+            "invalid_status": "Der Webserver der Pumpe funktioniert nicht richtig.",
+            "timeout": "Die Anfrage hat länger als 10 Sekunden gedauert.",
+            "interval_is_zero": "Das Aktualisierungsintervall muss größer als null sein.",
+            "intervall_smaller_than_zero": "Das Aktualisierungsintervall darf nicht negativ sein."
+        },
+        "abort": {
+            "already_configured": "Dieses Gerät ist bereits konfiguriert."
+        }
+    },
+    "entity": {
+        "sensor": {
+            "serial_number": {
+                "name": "Seriennummer"
+            },
+            "software_version": {
+                "name": "Softwareversion"
+            },
+            "equipment_number": {
+                "name": "Gerätenummer"
+            },
+            "running_duration": {
+                "name": "Laufzeit"
+            },
+            "pressure": {
+                "name": "Druck"
+            },
+            "mp_stop_in": {
+                "name": "Hauptpumpe stoppt in"
+            },
+            "cistern_level": {
+                "name": "Zisternenstand"
+            },
+            "valve_position": {
+                "name": "Ventilstellung"
+            },
+            "calc_protection_timer": {
+                "name": "Verkalkungsschutz-Timer"
+            },
+            "flushing_timer": {
+                "name": "Spül-Timer"
+            },
+            "pump_switches_this_hour": {
+                "name": "Pumpenzyklen in dieser Stunde"
+            },
+            "system_hours": {
+                "name": "Systembetriebsstunden"
+            },
+            "mp_hours": {
+                "name": "Hauptpumpenstunden"
+            },
+            "cp_hours": {
+                "name": "Zisternenpumpenstunden"
+            },
+            "system_switches": {
+                "name": "Systemschaltungen"
+            },
+            "mp_switches": {
+                "name": "Hauptpumpenschaltungen"
+            },
+            "cp_switches": {
+                "name": "Zisternenpumpenschaltungen"
+            },
+            "mp_type": {
+                "name": "Hauptpumpentyp"
+            },
+            "cp_count": {
+                "name": "Anzahl Zisternenpumpen"
+            },
+            "pressure_range": {
+                "name": "Druckbereich"
+            },
+            "over_pressure_threshold": {
+                "name": "Überdruckschwelle"
+            },
+            "cistern_sensor_range": {
+                "name": "Zisternensensorbereich"
+            },
+            "cistern_sensor_installed_height": {
+                "name": "Einbauhöhe des Zisternensensors"
+            },
+            "high_water_threshold": {
+                "name": "Hochwasserschwelle"
+            },
+            "cistern_shape": {
+                "name": "Zisternenform"
+            },
+            "cistern_height_or_diameter": {
+                "name": "Zisternenhöhe / Durchmesser"
+            },
+            "pump_kick_interval": {
+                "name": "Pumpenkick-Intervall"
+            },
+            "pump_kick_duration": {
+                "name": "Pumpenkick-Dauer"
+            },
+            "over_flow_threshold": {
+                "name": "Überlaufschwelle"
+            },
+            "tap_water_threshold": {
+                "name": "Leitungswasserschwelle"
+            },
+            "rain_water_threshold": {
+                "name": "Regenwasserschwelle"
+            },
+            "calcination_protection_interval": {
+                "name": "Verkalkungsschutz-Intervall"
+            },
+            "flushing_interval": {
+                "name": "Spül-Intervall"
+            },
+            "flushing_duration": {
+                "name": "Spüldauer"
+            },
+            "pump_max_runtime": {
+                "name": "Maximale Pumpenlaufzeit"
+            },
+            "fault_message_behavior": {
+                "name": "Fehlermeldungsverhalten"
+            },
+            "minimum_pressure": {
+                "name": "Mindestdruck"
+            },
+            "dry_run_delay": {
+                "name": "Trockenlaufschutz-Verzögerung"
+            },
+            "dry_run_tap_water": {
+                "name": "Trockenlauf (Leitungswasser)"
+            },
+            "dry_run_rain_water": {
+                "name": "Trockenlauf (Regenwasser)"
+            },
+            "maximum_pump_cycles_per_hour": {
+                "name": "Maximale Pumpzyklen pro Stunde"
+            },
+            "switch_on_pressure": {
+                "name": "Einschaltdruck"
+            },
+            "switch_off_pressure": {
+                "name": "Ausschaltdruck"
+            },
+            "mp_stop_delay": {
+                "name": "Hauptpumpen-Stoppverzögerung"
+            },
+            "cp_start_time": {
+                "name": "Zisternenpumpe Startzeit"
+            },
+            "cp_stop_time": {
+                "name": "Zisternenpumpe Stoppzeit"
+            },
+            "pressure_delta_tap_water": {
+                "name": "Druckdifferenz (Leitungswasser)"
+            },
+            "pressure_reduction_interval": {
+                "name": "Druckreduktions-Intervall"
+            },
+            "pressure_reduction_amount": {
+                "name": "Druckreduktions-Wert"
+            },
+            "mp_mode": {
+                "name": "Hauptpumpenmodus"
+            },
+            "cp_mode": {
+                "name": "Zisternenpumpenmodus"
+            },
+            "mp_manual_runtime": {
+                "name": "Hauptpumpe manuelle Laufzeit"
+            },
+            "cp_manual_runtime": {
+                "name": "Zisternenpumpe manuelle Laufzeit"
+            },
+            "state": {
+                "name": "Pumpe läuft"
+            },
+            "on_pressure_reached": {
+                "name": "Einschaltdruck erreicht"
+            },
+            "off_pressure_reached": {
+                "name": "Ausschaltdruck erreicht"
+            },
+            "pump_kick": {
+                "name": "Pumpenkick aktiviert"
+            },
+            "drives_enabled": {
+                "name": "Antriebe aktiviert"
+            },
+            "alarm_active": {
+                "name": "Alarm aktiv"
+            }
+        }
+    }
+}
