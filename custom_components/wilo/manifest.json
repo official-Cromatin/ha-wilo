@@ -3,8 +3,8 @@
   "name": "Wilo",
   "codeowners": ["@official-Cromatin"],
   "integration_type": "device",
+  "iot_class": "local_polling",
   "documentation": "https://github.com/official-Cromatin/ha-wilo",
-  "icon": "https://raw.githubusercontent.com/official-Cromatin/ha-wilo/main/icons/integration-icon.png"
   "requirements": [
     "lxml>=6.0.1"
   ],
