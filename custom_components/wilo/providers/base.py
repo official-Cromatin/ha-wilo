@@ -7,15 +7,15 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceInfo
 
 from ..const import DOMAIN
-from ..models import WiloModels
 from ..datastores import Datastores
-from ..wilo_sensor_descriptor import WiloEntityDescriptor
+from ..models import WiloModels
+from ..wilo_sensor_descriptor import WiloSensorDescriptors
 
 
 class BaseProvider(ABC):
     """Base class all providers inherit from."""
 
-    SENSORS:list[WiloEntityDescriptor]
+    SENSORS:list[WiloSensorDescriptors]
 
     def __init__(self, device_ip:str, device_id:int, model:WiloModels, hass:HomeAssistant):
         """Initialize the provider class.
@@ -33,7 +33,7 @@ class BaseProvider(ABC):
             Home assistant instance used for various tasks.
         """
         if device_id == 0:
-            self._unique_id = f"{model.value}_{device_id}"
+            self._unique_id = f"{model.value}"
         else:
             self._unique_id = f"{model.value}_{device_id}"
 
