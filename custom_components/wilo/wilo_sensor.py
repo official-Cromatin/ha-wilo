@@ -45,6 +45,10 @@ class GenericWiloSensor(CoordinatorEntity, SensorEntity):
     @property
     def device_info(self) -> DeviceInfo:
         return self._provider.device_info
+    
+    @property
+    def has_entity_name(self) -> bool:
+        return True
 
 
 class GenericWiloBinarySensor(CoordinatorEntity, BinarySensorEntity):
@@ -83,3 +87,7 @@ class GenericWiloBinarySensor(CoordinatorEntity, BinarySensorEntity):
     @property
     def device_info(self) -> DeviceInfo:
         return self._provider.device_info
+
+    @property
+    def has_entity_name(self) -> bool:
+        return True
