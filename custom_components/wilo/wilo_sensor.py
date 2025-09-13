@@ -31,6 +31,7 @@ class GenericWiloSensor(CoordinatorEntity, SensorEntity):
         self._attr_unique_id = f"{provider.unique_id}_{descriptor.partial_unique_entity_id}"
         self.entity_id = f"sensor.{provider.unique_id}_{descriptor.partial_unique_entity_id}"
         self._attr_translation_key = descriptor.translation_key
+        self._attr_has_entity_name = True
         self._attr_device_class = descriptor.device_class
         self._attr_state_class = descriptor.state_class
         self._attr_native_unit_of_measurement = descriptor.native_unit_of_measurement
@@ -46,10 +47,6 @@ class GenericWiloSensor(CoordinatorEntity, SensorEntity):
     @property
     def device_info(self) -> DeviceInfo:
         return self._provider.device_info
-    
-    @property
-    def has_entity_name(self) -> bool:
-        return True
 
 
 class GenericWiloBinarySensor(CoordinatorEntity, BinarySensorEntity):
@@ -72,6 +69,7 @@ class GenericWiloBinarySensor(CoordinatorEntity, BinarySensorEntity):
         self._attr_unique_id = f"{provider.unique_id}_{descriptor.partial_unique_entity_id}"
         self.entity_id = f"sensor.{provider.unique_id}_{descriptor.partial_unique_entity_id}"
         self._attr_translation_key = descriptor.translation_key
+        self._attr_has_entity_name = True
         self._attr_device_class = descriptor.device_class
         self._attr_entity_registry_enabled_default = descriptor.entity_registry_enabled_default
         self._attr_entity_category = descriptor.entity_category
@@ -89,7 +87,3 @@ class GenericWiloBinarySensor(CoordinatorEntity, BinarySensorEntity):
     @property
     def device_info(self) -> DeviceInfo:
         return self._provider.device_info
-
-    @property
-    def has_entity_name(self) -> bool:
-        return True
