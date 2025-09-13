@@ -9,6 +9,7 @@ from homeassistant.helpers.update_coordinator import (
 )
 
 from .wilo_sensor_descriptor import WiloSensorDescriptor
+from .const import DOMAIN
 
 
 class GenericWiloSensor(CoordinatorEntity, SensorEntity):
@@ -29,7 +30,7 @@ class GenericWiloSensor(CoordinatorEntity, SensorEntity):
         super().__init__(coordinator)
         self._provider = provider
         self._attr_unique_id = f"{provider.unique_id}_{descriptor.partial_unique_entity_id}"
-        self.entity_id = f"sensor.{provider.unique_id}_{descriptor.partial_unique_entity_id}"
+        self.entity_id = f"sensor.{DOMAIN}_{provider.unique_id}_{descriptor.partial_unique_entity_id}"
         self._attr_translation_key = descriptor.translation_key
         self._attr_has_entity_name = True
         self._attr_device_class = descriptor.device_class
@@ -67,7 +68,7 @@ class GenericWiloBinarySensor(CoordinatorEntity, BinarySensorEntity):
         super().__init__(coordinator)
         self._provider = provider
         self._attr_unique_id = f"{provider.unique_id}_{descriptor.partial_unique_entity_id}"
-        self.entity_id = f"sensor.{provider.unique_id}_{descriptor.partial_unique_entity_id}"
+        self.entity_id = f"sensor.{DOMAIN}_{provider.unique_id}_{descriptor.partial_unique_entity_id}"
         self._attr_translation_key = descriptor.translation_key
         self._attr_has_entity_name = True
         self._attr_device_class = descriptor.device_class
