@@ -29,6 +29,7 @@ class GenericWiloSensor(CoordinatorEntity, SensorEntity):
         super().__init__(coordinator)
         self._provider = provider
         self._attr_unique_id = f"{provider.unique_id}_{descriptor.partial_unique_entity_id}"
+        self.entity_id = f"sensor.{provider.unique_id}_{descriptor.partial_unique_entity_id}"
         self._attr_translation_key = descriptor.translation_key
         self._attr_device_class = descriptor.device_class
         self._attr_state_class = descriptor.state_class
@@ -69,6 +70,7 @@ class GenericWiloBinarySensor(CoordinatorEntity, BinarySensorEntity):
         super().__init__(coordinator)
         self._provider = provider
         self._attr_unique_id = f"{provider.unique_id}_{descriptor.partial_unique_entity_id}"
+        self.entity_id = f"sensor.{provider.unique_id}_{descriptor.partial_unique_entity_id}"
         self._attr_translation_key = descriptor.translation_key
         self._attr_device_class = descriptor.device_class
         self._attr_entity_registry_enabled_default = descriptor.entity_registry_enabled_default
