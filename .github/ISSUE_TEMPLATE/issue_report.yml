@@ -1,0 +1,57 @@
+name: Issue Report
+description: You found a bug or something is not working as expected? Report it here.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "*Before you create an issue, please check first if an issue already exists that addresses your concern.*"
+
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: Issue Description
+      description: A clear description of the issue you encountered.
+    validations:
+      required: true
+
+  - type: input
+    id: integration-version
+    attributes:
+      label: Integration Release Version
+      description: >
+        What version of the integration are you using?
+        Go to Settings > Devices & Services > Wilo Integration (top section) > Version number on the top left, below the integration name.
+    placeholder: "e.g. 1.1.1-alpha"
+    validations:
+      required: true
+
+  - type: input
+    id: homeassistant-version
+    attributes:
+      label: Home Assistant Release Version
+      description: > 
+        What version of Home Assistant are you using?
+        Go to Settings > About > Core.
+    placeholder: "e.g. 2025.12.2"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: If there are specific steps to reproduce the issue, please list them here.
+      placeholder: >
+        1. Configure the Integration
+        2. Execute the following action
+        3. Observe the (unexpected) result XY
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs-help
+    attributes:
+      label: Logs help us enormously to quickly identify and fix the issue.
+      description: >
+        In Home Assistant, you can find your logs here:
+        Settings > System > Logs > Set the filter in the top-right corner to "Home Assistant Core".
