@@ -21,7 +21,6 @@ body:
       description: >
         What version of the integration are you using?
         Go to Settings > Devices & Services > Wilo Integration (top section) > Version number on the top left, below the integration name.
-    placeholder: "e.g. 1.1.1-alpha"
     validations:
       required: true
 
@@ -32,7 +31,6 @@ body:
       description: > 
         What version of Home Assistant are you using?
         Go to Settings > About > Core.
-    placeholder: "e.g. 2025.12.2"
     validations:
       required: true
 
